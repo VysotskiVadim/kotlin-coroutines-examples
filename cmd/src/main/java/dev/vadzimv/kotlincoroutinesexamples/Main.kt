@@ -19,6 +19,7 @@ fun main() {
     runExample("context") {
         coroutineScope { contextExample() }
     }
+    runExample("structured concurrency") { structuredConcurrency() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
