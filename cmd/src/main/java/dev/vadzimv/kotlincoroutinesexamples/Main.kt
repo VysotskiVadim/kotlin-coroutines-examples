@@ -13,6 +13,9 @@ fun main() {
             launchExample()
         }
     }
+    runExample("suspend va launch task") {
+        suspendVsLaunchTask()
+    }
     runExample("context") {
         coroutineScope { contextExample() }
     }
@@ -25,5 +28,6 @@ fun runExample(name: String, example: suspend () -> Unit) {
     } catch (e: Throwable) {
         println("example $name failed with error: $e")
     }
-    print("$name finished")
+    println("\n$name finished")
+    println("---------------------------")
 }
