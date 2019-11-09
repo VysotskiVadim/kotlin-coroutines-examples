@@ -13,13 +13,10 @@ fun main() {
             launchExample()
         }
     }
-    runExample("suspend va launch task") {
-        suspendVsLaunchTask()
-    }
-    runExample("context") {
-        coroutineScope { contextExample() }
-    }
+    runExample("suspend va launch task") { suspendVsLaunchTask() }
+    runExample("context") { coroutineScope { contextExample() } }
     runExample("structured concurrency") { structuredConcurrency() }
+    runExample("custom scope") { customScope() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
