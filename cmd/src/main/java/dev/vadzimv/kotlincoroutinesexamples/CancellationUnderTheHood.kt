@@ -12,6 +12,7 @@ suspend fun cancellationUnderTheHood() = coroutineScope {
                 }
             } catch (ce: CancellationException) {
                 println("caught cancellation exception")
+                throw ce;
             }
         }
         launch {
