@@ -18,6 +18,7 @@ fun main() {
     runExample("structured concurrency") { structuredConcurrency() }
     runExample("custom scope") { customScope() }
     runExample("cancellation under the hood") { cancellationUnderTheHood() }
+    runExample("suspend function and exception") { suspendFunctionsAndExceptionsExample() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
