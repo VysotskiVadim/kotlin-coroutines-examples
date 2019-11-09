@@ -19,6 +19,7 @@ fun main() {
     runExample("custom scope") { customScope() }
     runExample("cancellation under the hood") { cancellationUnderTheHood() }
     runExample("suspend function and exception") { suspendFunctionsAndExceptionsExample() }
+    runExample("async and exceptions") { asyncAndExceptions() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
