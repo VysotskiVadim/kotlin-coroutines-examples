@@ -21,6 +21,6 @@ suspend fun avoidGlobalScopeExample() = coroutineScope {
     delay(50)
     println("cancelling")
     job.cancel()
-    println("who have survived after cancellation")
+    println("who have survived after cancellation?")
     delay(100)
 }
