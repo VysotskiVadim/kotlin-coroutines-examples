@@ -1,21 +1,14 @@
 package dev.vadzimv.kotlincoroutinesexamples
 
-import com.google.android.material.snackbar.Snackbar
+import android.os.Bundle
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_main.view.*
+import kotlinx.android.synthetic.main.text_and_button.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+                .setAction("Action", null).show()
         }
 
     }
@@ -68,23 +61,18 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    inner class SectionsPagerAdapter(fm: FragmentManager) :
+        FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    /**
-     * A [FragmentPagerAdapter] that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        private val items = listOf(
+            { CounterExampleFragment() },
+            { PlaceholderFragment.newInstance(1) },
+            { PlaceholderFragment.newInstance(2) }
+        )
 
-        override fun getItem(position: Int): Fragment {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1)
-        }
+        override fun getItem(position: Int): Fragment = items[position]()
 
-        override fun getCount(): Int {
-            // Show 3 total pages.
-            return 3
-        }
+        override fun getCount(): Int = items.size
     }
 
     /**
@@ -92,10 +80,12 @@ class MainActivity : AppCompatActivity() {
      */
     class PlaceholderFragment : Fragment() {
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_main, container, false)
-            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val rootView = inflater.inflate(R.layout.text_and_button, container, false)
+            rootView.text.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
             return rootView
         }
 
