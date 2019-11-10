@@ -21,6 +21,10 @@ fun main() {
     runExample("cancellation under the hood") { cancellationUnderTheHood() }
     runExample("suspend function and exception") { suspendFunctionsAndExceptionsExample() }
     runExample("async and exceptions") { asyncAndExceptions() }
+    runExample("supervision example") { supervisionExample() }
+    runExample("supervision example 2") { supervisionExample2() }
+    runExample("supervision and cancellation") { supervisionAndCancellation() }
+    runExample("supervision with few children") { supervisionWithFewChildren() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
