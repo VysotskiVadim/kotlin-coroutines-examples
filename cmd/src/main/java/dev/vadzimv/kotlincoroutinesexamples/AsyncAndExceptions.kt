@@ -1,8 +1,10 @@
 package dev.vadzimv.kotlincoroutinesexamples
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
-suspend fun asyncAndExceptions() = supervisorScope {
+suspend fun asyncAndExceptions() = coroutineScope {
     val deffer = async<Int> {
         delay(10)
         throw Error("async oops")
