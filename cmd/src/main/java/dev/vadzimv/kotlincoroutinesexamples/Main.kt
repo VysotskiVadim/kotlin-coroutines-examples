@@ -17,6 +17,7 @@ fun main() {
     runExample("context") { coroutineScope { contextExample() } }
     runExample("structured concurrency") { structuredConcurrency() }
     runExample("custom scope") { customScope() }
+    runExample("avoid global scope") { avoidGlobalScopeExample() }
     runExample("cancellation under the hood") { cancellationUnderTheHood() }
     runExample("suspend function and exception") { suspendFunctionsAndExceptionsExample() }
     runExample("async and exceptions") { asyncAndExceptions() }
