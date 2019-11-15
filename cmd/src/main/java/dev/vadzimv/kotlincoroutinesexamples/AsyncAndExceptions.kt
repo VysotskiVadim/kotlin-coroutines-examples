@@ -5,12 +5,12 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 suspend fun asyncAndExceptions() = coroutineScope {
-    val defered = async<Int> {
+    val deferred = async<Int> {
         delay(10)
         throw Error("async oops")
     }
     try {
-        val result = defered.await()
+        val result = deferred.await()
         println(result)
     } catch (e: Error) {
         println("error in async is ${e.message}")

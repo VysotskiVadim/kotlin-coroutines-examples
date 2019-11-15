@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         private val items = listOf(
-            { CounterAtViewModelExampleFragment() },
+            { ScopesViaCounterFragment() },
             { PlaceholderFragment.newInstance(1) },
             { PlaceholderFragment.newInstance(2) }
         )
