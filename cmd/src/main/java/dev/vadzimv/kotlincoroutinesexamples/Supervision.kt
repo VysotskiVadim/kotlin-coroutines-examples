@@ -5,12 +5,12 @@ import kotlin.coroutines.coroutineContext
 
 suspend fun supervisionExample() {
     with(CoroutineScope(coroutineContext + SupervisorJob())) {
-        val deffer = async<Int> {
+        val deferred = async<Int> {
             delay(10)
             throw Error("async oops")
         }
         try {
-            val result = deffer.await()
+            val result = deferred.await()
             println(result)
         } catch (e: Error) {
             println("error in async is ${e.message}")
@@ -20,12 +20,12 @@ suspend fun supervisionExample() {
 
 suspend fun supervisionExample2() {
     supervisorScope {
-        val deffer = async<Int> {
+        val defered = async<Int> {
             delay(10)
             throw Error("async oops")
         }
         try {
-            val result = deffer.await()
+            val result = defered.await()
             println(result)
         } catch (e: Error) {
             println("error in async is ${e.message}")
@@ -36,12 +36,12 @@ suspend fun supervisionExample2() {
 suspend fun supervisionAndCancellation() = coroutineScope {
     val job = launch {
         with(CoroutineScope(coroutineContext + SupervisorJob())) {
-            val deffer = async<Int> {
+            val defered = async<Int> {
                 delay(100)
                 throw Error("async oops")
             }
             try {
-                val result = deffer.await()
+                val result = defered.await()
                 println(result)
             } catch (e: Error) {
                 println("error in async is ${e.message}")

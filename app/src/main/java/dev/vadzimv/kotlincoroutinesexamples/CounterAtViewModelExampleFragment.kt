@@ -10,12 +10,12 @@ import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.text_and_button.*
 import kotlinx.coroutines.delay
 
-class CounterExampleFragment : TextButtonFragment() {
+class CounterAtViewModelExampleFragment : TextButtonFragment() {
 
     private val viewModel: CounterViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setTitle("Counter example")
+        setTitle("counter at view model")
         button.visibility = View.GONE
         text.visibility = View.VISIBLE
         viewModel.counter.observe(viewLifecycleOwner) {
