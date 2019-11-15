@@ -31,7 +31,7 @@
             android:id="@+id/viewModelV2LiveDataTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Model V2 LiveData coroutine builder"
+            android:text="View Model V2 LiveData"
             app:layout_constraintTop_toBottomOf="@+id/viewModelV1Title"
             app:layout_constraintBottom_toTopOf="@+id/viewModelV2ScopeTitle"
             app:layout_constraintStart_toStartOf="parent"

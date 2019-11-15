@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
 class ScopesViaCounterFragment : Fragment() {
 
     private val viewModelV2: CounterViewModelV2 by viewModels()
-    private val viewModelV1: CounterViewModelV2 by viewModels()
+    private val viewModelV1: CounterViewModelV1 by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.scopes_via_counter, container, false)
@@ -24,7 +24,7 @@ class ScopesViaCounterFragment : Fragment() {
         viewModelV2.liveDataCoroutineBuilderCounter.observe(viewLifecycleOwner) {
             viewModelV2LiveDataValue.text = it.toString()
         }
-        viewModelV2.customScopeBasedCounter.observe(viewLifecycleOwner) {
+        viewModelV2.viewModelScopeBasedCounter.observe(viewLifecycleOwner) {
             viewModelV2ScopeValue.text = it.toString()
         }
         viewModelV1.customScopeBasedCounter.observe(viewLifecycleOwner) {
@@ -36,6 +36,7 @@ class ScopesViaCounterFragment : Fragment() {
 class CounterViewModelV2 : ViewModel() {
     val liveDataCoroutineBuilderCounter: LiveData<Int> = liveData {
         var i = 0
+        emit(i)
         while (true) {
             delay(1000)
             emit(i++)
@@ -43,16 +44,16 @@ class CounterViewModelV2 : ViewModel() {
     }
 
     val _viewModelScopeBasedCounter = MutableLiveData<Int>()
-    val customScopeBasedCounter: LiveData<Int> get() = _viewModelScopeBasedCounter
+    val viewModelScopeBasedCounter: LiveData<Int> get() = _viewModelScopeBasedCounter
 
     init {
         viewModelScope.launch {
             var i = 0
-            while (true) {
-                delay(1000)
-                i++
+            do {
                 _viewModelScopeBasedCounter.value = i
-            }
+                i++
+                delay(1000)
+            } while (true)
         }
     }
 }
@@ -63,16 +64,16 @@ class CounterViewModelV1 : ViewModel(), CoroutineScope {
         get() = Dispatchers.Main + SupervisorJob()
 
     private val _viewModelScopeBasedCounter = MutableLiveData<Int>()
-    val viewModelScopeBasedCounter: LiveData<Int> get() = _viewModelScopeBasedCounter
+    val customScopeBasedCounter: LiveData<Int> get() = _viewModelScopeBasedCounter
 
     init {
         launch {
             var i = 0
-            while (true) {
-                delay(1000)
-                i++
+            do {
                 _viewModelScopeBasedCounter.value = i
-            }
+                i++
+                delay(1000)
+            } while (true)
         }
     }
 }
