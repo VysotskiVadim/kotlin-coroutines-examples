@@ -1,12 +1,15 @@
 package dev.vadzimv.kotlincoroutinesexamples
 
 import contextExample
+import kotlinx.coroutines.DEBUG_PROPERTY_NAME
+import kotlinx.coroutines.DEBUG_PROPERTY_VALUE_ON
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
 import launchExample
 import suspendExample
 
 fun main() {
+    //System.setProperty(DEBUG_PROPERTY_NAME, DEBUG_PROPERTY_VALUE_ON)
     runExample("suspend") { suspendExample() }
     runExample("launch") {
         coroutineScope {

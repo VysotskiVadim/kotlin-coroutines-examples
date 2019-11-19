@@ -7,12 +7,12 @@ suspend fun supervisionExample() {
     with(CoroutineScope(coroutineContext + SupervisorJob())) {
         val deferred = async<Int> {
             delay(10)
-            throw Error("async oops")
+            throw Throwable("async oops")
         }
         try {
             val result = deferred.await()
             println(result)
-        } catch (e: Error) {
+        } catch (e: Throwable) {
             println("error in async is ${e.message}")
         }
     }
@@ -22,12 +22,12 @@ suspend fun supervisionExample2() {
     supervisorScope {
         val deferred = async<Int> {
             delay(10)
-            throw Error("async oops")
+            throw Throwable("async oops")
         }
         try {
             val result = deferred.await()
             println(result)
-        } catch (e: Error) {
+        } catch (e: Throwable) {
             println("error in async is ${e.message}")
         }
     }
@@ -58,7 +58,7 @@ suspend fun supervisionAndCancellation() = coroutineScope {
 }
 
 suspend fun supervisionWithFewChildren() = supervisorScope {
-    val printExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+    val printExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         println("coroutine failed with error: ${throwable.message}")
     }
     launch(printExceptionHandler) {
