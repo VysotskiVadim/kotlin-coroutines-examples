@@ -28,6 +28,7 @@ fun main() {
     runExample("supervision example 2") { supervisionExample2() }
     runExample("supervision and cancellation") { supervisionAndCancellation() }
     runExample("supervision with few children") { supervisionWithFewChildren() }
+    runExample("callback order example") { callbacksOrderExample() }
 }
 
 fun runExample(name: String, example: suspend () -> Unit) {
