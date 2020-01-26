@@ -4,7 +4,9 @@ import kotlinx.coroutines.*
 
 suspend fun callbacksOrderExample() = coroutineScope {
     val result = withContext(Dispatchers.IO) {
-        coroutineContext[Job]?.invokeOnCompletion { println("invokeOnCompletion callback") }
+        coroutineContext[Job]?.invokeOnCompletion {
+            println("invokeOnCompletion callback")
+        }
         delay(300)
         "completed"
     }
